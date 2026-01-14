@@ -19,20 +19,23 @@ const silkscreen = Silkscreen({
 });
 
 export const metadata: Metadata = {
-  title: 'Adel Guitoun',
-  description: `Hi 👋, I'm Adel Guitoun. I'm a passionate software engineer with a knack for creating scalable, high-performance applications and reusable systems. With a strong foundation in front-end and back-end technologies, I specialize in crafting solutions that are as impactful for users as they are efficient for developers.`,
-  creator: 'Adel Guitoun',
-  applicationName: 'My website',
+  title: 'Amanda Carvalho · Frontend & Fullstack Developer',
+  description:
+    'Sou Amanda Carvalho, desenvolvedora frontend/fullstack. Crio interfaces modernas, acessíveis e performáticas, com foco em experiência do usuário, código limpo e resultados para negócios.',
+  creator: 'Amanda Carvalho',
+  applicationName: 'amanda.dev',
   keywords: [
-    'Adel Guitoun',
-    'Adel',
-    'Guitoun',
-    'Portfolio',
+    'Amanda Carvalho',
+    'Frontend Developer',
+    'Fullstack Developer',
+    'React',
     'Next.js',
-    'Software engineer',
+    'TypeScript',
+    'Portfólio',
+    'Desenvolvedora Frontend',
   ],
   icons: {
-    icon: './favicon.ico',
+    icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
     other: [
       {
@@ -49,27 +52,25 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://www.adelguitoun.com',
-    title: 'Adel Guitoun - Software Engineer',
-    description: `Hi 👋, I'm Adel Guitoun. I'm a passionate software engineer with a knack for creating scalable, high-performance applications and reusable systems. With a strong foundation in front-end and back-end technologies, I specialize in crafting solutions that are as impactful for users as they are efficient for developers.`,
+    url: 'https://amanda.dev',
+    title: 'Amanda Carvalho · Frontend & Fullstack Developer',
+    description:
+      'Portfólio de Amanda Carvalho, desenvolvedora frontend/fullstack focada em interfaces modernas, performance e experiência do usuário.',
     images: [
       {
         url: '/opengraph-image.jpg',
         width: 1200,
-        height: 628,
-        alt: 'Adel Guitoun',
+        height: 630,
+        alt: 'Amanda Carvalho · Frontend Developer',
       },
     ],
   },
   twitter: {
-    title: 'Adel Guitoun - Software Engineer',
-    description: `Hi 👋, I'm Adel Guitoun. I'm a passionate software engineer with a knack for creating scalable, high-performance applications and reusable systems. With a strong foundation in front-end and back-end technologies, I specialize in crafting solutions that are as impactful for users as they are efficient for developers.`,
     card: 'summary_large_image',
-    site: '@AdelGuitoun',
-    images: '/opengraph-image.jpg',
-  },
-  verification: {
-    google: 'k83JtkKiU8MvRqLS05NLwZPSOGLJXbZpzln4wdJ-iPI',
+    title: 'Amanda Carvalho · Frontend Developer',
+    description:
+      'Desenvolvedora frontend/fullstack criando experiências digitais modernas, acessíveis e escaláveis.',
+    images: ['/opengraph-image.jpg'],
   },
 };
 
@@ -79,7 +80,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body className={`${inter.variable} ${silkscreen.variable} relative`}>
         <NavBar />
         <main>{children}</main>
