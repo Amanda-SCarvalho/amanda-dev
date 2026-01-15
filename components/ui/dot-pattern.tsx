@@ -23,7 +23,7 @@ export function DotPattern({
   cr = 1,
   className,
   ...props
-}: DotPatternProps) {
+}: Readonly<DotPatternProps>) {
   const id = useId();
 
   return (

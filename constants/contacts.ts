@@ -1,24 +1,27 @@
 export const contacts = [
   {
-    id: 'tweeter',
-    title: 'X - tweeter',
-    icon: '/tweeter.svg',
-    description: 'Stay updated with my latest posts and thoughts.',
-    path: 'https://x.com/GuitounAdel',
-  },
-  {
     id: 'linkedin',
     title: 'LinkedIn',
     icon: '/linkedin.svg',
-    description: "Let's connect and explore opportunities together.",
-    path: 'https://www.linkedin.com/in/adelguitoun/',
+    description:
+      'Conecte-se comigo para trocar ideias, oportunidades e projetos.',
+    path: 'https://www.linkedin.com/in/amanda-scarvalho/',
   },
   {
     id: 'email',
     title: 'Email',
     icon: '/email.svg',
-    description: 'Feel free to reach out to me directly via email.',
-    path: 'mailto:adeelguitoun@gmail.com',
+    description:
+      'Entre em contato para propostas, freelas ou colaborações.',
+    path: 'mailto:amanda.s.carvalho15@gmail.com',
+  },
+  {
+    id: 'github',
+    title: 'GitHub',
+    icon: '/github.svg',
+    description:
+      'Veja meus projetos, códigos e experimentos em desenvolvimento.',
+    path: 'https://github.com/amanda-scarvalho',
   },
 ];
 
@@ -26,37 +29,19 @@ export const socialLinks = [
   {
     id: 'resume',
     icon: '/resume.svg',
-    alt: "Link to Adel's resume",
+    alt: 'Link para o currículo da Amanda Carvalho',
     path: 'https://drive.google.com/file/d/1YiBWrY2cMZRaHtbeiHZSjYpizlhXqgEr/view?usp=sharing',
   },
   {
     id: 'github',
     icon: '/github.svg',
-    alt: "Link to Adel's gitHub profile",
-    path: 'https://github.com/adel-gu',
-  },
-  {
-    id: 'tweeter',
-    icon: '/tweeter.svg',
-    alt: "Link to Adel's tweeter profile",
-    path: 'https://x.com/GuitounAdel',
+    alt: 'Perfil da Amanda Carvalho no GitHub',
+    path: 'https://github.com/amanda-scarvalho',
   },
   {
     id: 'linkedin',
     icon: '/linkedin.svg',
-    alt: "Link to Adel's linkedin profile",
-    path: 'https://www.linkedin.com/in/adelguitoun/',
-  },
-  {
-    id: 'wellfound',
-    icon: '/wellfound.svg',
-    alt: "Link to Adel's wellfound profile",
-    path: 'https://wellfound.com/u/adel-guitoun',
-  },
-  {
-    id: 'medium',
-    icon: '/medium.svg',
-    alt: "Link to Adel's medium profile",
-    path: 'https://medium.com/@adeelguitoun',
+    alt: 'Perfil da Amanda Carvalho no LinkedIn',
+    path: 'https://www.linkedin.com/in/amanda-scarvalho/',
   },
 ];
