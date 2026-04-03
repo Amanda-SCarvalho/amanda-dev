@@ -10,6 +10,11 @@ const NavLinks = () => {
       <Link className="py-4 md:py-0 md:hover:opacity-70" href="/">
         Blog
       </Link>
+
+      <Link className="py-4 md:py-0 md:hover:opacity-70" href="/career">
+        Mapa
+      </Link>
+
     </nav>
   );
 };
