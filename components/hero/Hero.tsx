@@ -1,33 +1,58 @@
+"use client";
+
+import React from "react";
 import Link from "next/link";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function Hero() {
+  // posição do mouse
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // suavização (efeito fluido)
+  const smoothX = useSpring(mouseX, { stiffness: 100, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+
+  function handleMouseMove(e: React.MouseEvent) {
+    const { clientX, clientY } = e;
+    mouseX.set(clientX);
+    mouseY.set(clientY);
+  }
+
   return (
-    <section className="relative flex min-h-screen items-center px-6">
+    <section
+      onMouseMove={handleMouseMove}
+      role="none"
+      className="relative flex min-h-screen items-center overflow-hidden px-6"
+    >
       {/* Background */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950" />
 
-      {/* Glow */}
-      <div className="absolute left-1/2 top-1/2 -z-10 size-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/20 blur-3xl" />
+      {/* Glow que segue o mouse */}
+      <motion.div
+        style={{
+          x: smoothX,
+          y: smoothY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        className="pointer-events-none absolute -z-10 size-[400px] rounded-full bg-violet-500/20 blur-3xl"
+      />
 
       <div className="mx-auto w-full max-w-6xl">
         <div className="max-w-3xl">
-          {/* Headline */}
           <h1 className="text-4xl font-bold leading-tight text-foreground md:text-6xl">
             Desenvolvendo interfaces
-            <span className="block text-violet-400">
-              que fazem sentido
-            </span>
+            <span className="block text-violet-400">que fazem sentido</span>
             para pessoas e negócios
           </h1>
 
-          {/* Subtitle */}
           <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-            Sou <strong>Amanda Carvalho</strong>, desenvolvedora frontend/fullstack.
-            Crio aplicações modernas, performáticas e bem estruturadas,
-            focadas em experiência e resultado.
+            Sou <strong>Amanda Carvalho</strong>, desenvolvedora
+            frontend/fullstack. Crio aplicações modernas, performáticas e bem
+            estruturadas, focadas em experiência e resultado.
           </p>
 
-          {/* Buttons */}
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
               href="#projects"
@@ -44,7 +69,6 @@ export default function Hero() {
             </Link>
           </div>
 
-          {/* Tags */}
           <div className="mt-12 flex flex-wrap gap-3 text-sm uppercase tracking-wide">
             <span className="rounded-md bg-white/5 px-3 py-1 text-muted-foreground">
               UI moderna
