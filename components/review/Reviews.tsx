@@ -1,11 +1,22 @@
-import DotPattern from '../ui/dot-pattern';
-import ReviewDemo from './ReviewDemo';
+"use client";
+
+import DotPattern from "../ui/dot-pattern";
+import ReviewDemo from "./ReviewDemo";
+import { motion } from "framer-motion";
 
 const Reviews = () => {
   return (
     <section className="relative py-24">
       <div className="z-10 flex flex-col px-6 md:items-center md:justify-center">
-        <h3 className="h3-bold">Sincere words from incredible people</h3>
+        <motion.h3
+          className="h3-bold"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          Sincere words from incredible people
+        </motion.h3>
       </div>
 
       <ReviewDemo />
