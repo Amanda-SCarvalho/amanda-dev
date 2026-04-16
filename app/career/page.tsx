@@ -1,7 +1,9 @@
+/* eslint-disable tailwindcss/no-custom-classname */
+/* eslint-disable tailwindcss/classnames-order */
 "use client";
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 type Status = "mastered" | "learning" | "goal";
@@ -246,17 +248,17 @@ export default function CareerMap() {
   }
 
   const titleVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  }),
-};
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    }),
+  };
 
   return (
     <>
@@ -386,8 +388,7 @@ export default function CareerMap() {
           {/* ── Skills ── */}
           <section style={S.sec}>
             <h2 style={S.secLabel}>
-              <span style={S.secLine} />
-              habilidades
+              <span style={S.secLine} /> habilidades
             </h2>
 
             <div style={S.filters}>
@@ -410,8 +411,7 @@ export default function CareerMap() {
                 const c = cfg[tech.status];
                 const on = hovered === tech.name;
                 return (
-                  
-                  <div
+                  <button
                     key={tech.name}
                     className="tech-card"
                     onMouseEnter={() => setHovered(tech.name)}
@@ -440,7 +440,7 @@ export default function CareerMap() {
                     <div className={`card-desc${on ? " visible" : ""}`}>
                       {tech.description}
                     </div>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -449,8 +449,7 @@ export default function CareerMap() {
           {/* ── Timeline ── */}
           <section style={S.sec}>
             <h2 style={S.secLabel}>
-              <span style={S.secLine} />
-              linha do tempo
+              <span style={S.secLine} /> linha do tempo
             </h2>
 
             <div style={S.tl}>
@@ -490,8 +489,7 @@ export default function CareerMap() {
           {/* ── Goals ── */}
           <section style={S.sec}>
             <h2 style={S.secLabel}>
-              <span style={S.secLine} />
-              no radar
+              <span style={S.secLine} /> no radar
             </h2>
             <div style={S.goalsGrid}>
               {techs
@@ -499,7 +497,7 @@ export default function CareerMap() {
                 .map((t) => {
                   const on = hovered === t.name;
                   return (
-                    <div
+                    <button
                       key={t.name}
                       className="goal-card"
                       onMouseEnter={() => setHovered(t.name)}
@@ -521,7 +519,7 @@ export default function CareerMap() {
                       >
                         {t.description}
                       </div>
-                    </div>
+                    </button>
                   );
                 })}
             </div>
