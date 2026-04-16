@@ -1,7 +1,8 @@
 "use client";
 
+import React from "react";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 type Status = "mastered" | "learning" | "goal";
 
@@ -144,58 +145,72 @@ const techs: Tech[] = [
 const milestones: Milestone[] = [
   {
     year: "2022",
-    title: "Início da jornada",
+    title: "Estagiária em Desenvolvimento",
     description:
-      "Primeiros passos com HTML, CSS e lógica de programação. Descoberta do mundo do desenvolvimento web.",
+      "Primeiro contato com ambiente profissional. Atuação com HTML, CSS e suporte em pequenos ajustes de interface. Aprendizado de versionamento com Git e trabalho em equipe.",
     techs: ["HTML & CSS", "Git"],
   },
   {
     year: "2023",
-    title: "Frontend em foco",
+    title: "Desenvolvedora Frontend Júnior",
     description:
-      "Mergulho em JavaScript, React e design de interfaces. Início dos estudos de UX/UI e Figma.",
-    techs: ["JavaScript", "React", "Figma", "UX/UI Design"],
+      "Desenvolvimento de interfaces com JavaScript e React. Criação de componentes reutilizáveis e integração com APIs. Participação ativa em decisões de UI/UX.",
+    techs: ["JavaScript", "React", "UX/UI Design", "Figma"],
   },
   {
     year: "2024",
-    title: "Stack completo",
+    title: "Desenvolvedora Frontend Pleno",
     description:
-      "Expansão para TypeScript, Next.js e análise de dados com Python. Curso Java Web em andamento.",
-    techs: ["TypeScript", "Next.js", "Python", "SQL", "Tailwind CSS"],
+      "Evolução para projetos mais complexos com TypeScript e Next.js. Foco em performance, organização de código e boas práticas. Início da atuação com dados e backend.",
+    techs: ["TypeScript", "Next.js", "Tailwind CSS", "Python", "SQL"],
   },
   {
     year: "2025",
-    title: "Próximo nível",
+    title: "Desenvolvedora Fullstack Pleno",
     description:
-      "Metas traçadas: backend com Node.js, infraestrutura em cloud e containers com Docker.",
-    techs: ["Node.js", "AWS / Cloud", "Docker", "Angular"],
+      "Atuação fullstack com construção de APIs e integração completa de sistemas. Uso de Node.js, manipulação de banco de dados e deploy em ambientes cloud.",
+    techs: ["Node.js", "SQL", "Python", "AWS / Cloud"],
+  },
+  {
+    year: "2026",
+    title: "Desenvolvedora Fullstack Sênior",
+    description:
+      "Responsável por arquitetura de aplicações, decisões técnicas e mentoria de desenvolvedores. Foco em escalabilidade, performance e boas práticas de engenharia.",
+    techs: ["Node.js", "AWS / Cloud", "Docker", "React"],
+  },
+  {
+    year: "2027+",
+    title: "Tech Lead / Especialista",
+    description:
+      "Liderança técnica de projetos, definição de padrões e colaboração estratégica com produto e design. Evolução contínua em arquitetura e sistemas distribuídos.",
+    techs: ["AWS / Cloud", "Docker", "Node.js", "React"],
   },
 ];
 
 const cfg = {
   mastered: {
     label: "Sei usar",
-    color: "#a78bfa",
-    glow: "rgba(167, 139, 250, 0.2)",
-    border: "rgba(167, 139, 250, 0.2)",
-    borderHover: "rgba(167, 139, 250, 0.5)",
-    bgHover: "rgba(167, 139, 250, 0.08)",
+    color: "#34d399", // verde suave
+    glow: "rgba(52, 211, 153, 0.25)",
+    border: "rgba(52, 211, 153, 0.25)",
+    borderHover: "rgba(52, 211, 153, 0.6)",
+    bgHover: "rgba(52, 211, 153, 0.08)",
   },
   learning: {
     label: "Aprendendo",
-    color: "#c4b5fd",
-    glow: "rgba(196, 181, 253, 0.2)",
-    border: "rgba(196, 181, 253, 0.2)",
-    borderHover: "rgba(196, 181, 253, 0.5)",
-    bgHover: "rgba(196, 181, 253, 0.08)",
+    color: "#60a5fa", // azul moderno
+    glow: "rgba(96, 165, 250, 0.25)",
+    border: "rgba(96, 165, 250, 0.25)",
+    borderHover: "rgba(96, 165, 250, 0.6)",
+    bgHover: "rgba(96, 165, 250, 0.08)",
   },
   goal: {
     label: "Meta",
-    color: "#d8b4fe",
-    glow: "rgba(216, 180, 254, 0.2)",
-    border: "rgba(216, 180, 254, 0.2)",
-    borderHover: "rgba(216, 180, 254, 0.5)",
-    bgHover: "rgba(216, 180, 254, 0.08)",
+    color: "#a78bfa", // mantém roxo da identidade
+    glow: "rgba(167, 139, 250, 0.3)",
+    border: "rgba(167, 139, 250, 0.25)",
+    borderHover: "rgba(167, 139, 250, 0.6)",
+    bgHover: "rgba(167, 139, 250, 0.1)",
   },
 } satisfies Record<Status, object>;
 
@@ -215,6 +230,33 @@ export default function CareerMap() {
     activeCategory === "Todos"
       ? techs
       : techs.filter((t) => t.category === activeCategory);
+
+  // posição do mouse
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // suavização
+  const smoothX = useSpring(mouseX, { stiffness: 100, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+
+  function handleMouseMove(e: React.MouseEvent) {
+    const { clientX, clientY } = e;
+    mouseX.set(clientX);
+    mouseY.set(clientY);
+  }
+
+  const titleVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.8,
+      ease: "easeOut",
+    },
+  }),
+};
 
   return (
     <>
@@ -243,7 +285,47 @@ export default function CareerMap() {
         button { font-family: inherit; cursor: pointer; }
       `}</style>
 
-      <main style={S.page}>
+      <main style={S.page} onMouseMove={handleMouseMove}>
+        <motion.div
+          style={{
+            x: smoothX,
+            y: smoothY,
+            translateX: "-50%",
+            translateY: "-50%",
+          }}
+          className="pointer-events-none fixed -z-10 size-[400px] rounded-full bg-violet-500/20 blur-3xl"
+        />
+
+        <motion.div
+          className="pointer-events-none fixed -right-32 top-1/2 -z-10 size-[300px] rounded-full bg-purple-500/15 blur-3xl"
+          animate={{ y: [0, 50, 0] }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <div className="pointer-events-none fixed inset-0 -z-10">
+          {new Array(20).fill(null).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute size-1 rounded-full bg-white/20"
+              animate={{
+                y: [-20, 20],
+                opacity: [0.3, 0.8, 0.3],
+              }}
+              transition={{
+                duration: 5 + Math.random() * 5,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
+        </div>
         <div style={S.glow1} aria-hidden />
         <div style={S.glow2} aria-hidden />
         <div style={S.gridBg} aria-hidden />
@@ -252,11 +334,33 @@ export default function CareerMap() {
           {/* ── Header ── */}
           <header style={S.header}>
             <span style={S.eyebrow}>amanda.dev</span>
-            <h1 style={S.h1}>
-              mapa de
-              <br />
-              <span style={S.accent}>carreira</span>
-            </h1>
+            <motion.h1
+              className="text-4xl font-bold leading-tight text-foreground md:text-6xl"
+              style={{
+                fontFamily: "'Syne', system-ui, sans-serif",
+                letterSpacing: "-0.04em",
+                lineHeight: 0.95,
+                marginBottom: 28,
+              }}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.div custom={0} variants={titleVariants}>
+                mapa de
+              </motion.div>
+
+              <motion.div
+                custom={1}
+                variants={titleVariants}
+                className="text-violet-400"
+              >
+                carreira
+              </motion.div>
+
+              <motion.div custom={2} variants={titleVariants}>
+                fullstack
+              </motion.div>
+            </motion.h1>
             <p style={S.sub}>
               O que já construí, o que estou construindo e onde quero chegar.
               Passe o mouse sobre cada tecnologia para saber mais.
@@ -306,6 +410,7 @@ export default function CareerMap() {
                 const c = cfg[tech.status];
                 const on = hovered === tech.name;
                 return (
+                  
                   <div
                     key={tech.name}
                     className="tech-card"
@@ -434,30 +539,6 @@ const S: Record<string, React.CSSProperties> = {
     fontFamily: "'Syne', system-ui, sans-serif",
     position: "relative",
     overflowX: "hidden",
-  },
-  glow1: {
-    position: "fixed",
-    top: "-15%",
-    left: "-8%",
-    width: 560,
-    height: 560,
-    borderRadius: "50%",
-    background:
-      "radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%)",
-    pointerEvents: "none",
-    zIndex: 0,
-  },
-  glow2: {
-    position: "fixed",
-    bottom: "-10%",
-    right: "-8%",
-    width: 480,
-    height: 480,
-    borderRadius: "50%",
-    background:
-      "radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%)",
-    pointerEvents: "none",
-    zIndex: 0,
   },
   gridBg: {
     position: "fixed",

@@ -17,7 +17,7 @@ const ProjectCard = ({ src, title }: { src: string; title: string }) => {
     >
       {/* Animated border glow */}
       <motion.div
-        className="absolute inset-0 rounded-xl bg-gradient-to-r from-violet-500 via-purple-500 to-violet-500 p-0.5 -z-10"
+        className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-r from-violet-500 via-purple-500 to-violet-500 p-0.5"
         animate={isHovered ? { opacity: 1 } : { opacity: 0.3 }}
         transition={{ duration: 0.3 }}
       >
@@ -25,7 +25,7 @@ const ProjectCard = ({ src, title }: { src: string; title: string }) => {
       </motion.div>
 
       {/* Card container */}
-      <div className="relative size-full overflow-hidden rounded-xl shadow-2xl z-10 bg-neutral-900">
+      <div className="relative z-10 size-full overflow-hidden rounded-xl bg-neutral-900 shadow-2xl">
         {/* Image */}
         <Image
           src={src}
@@ -47,25 +47,25 @@ const ProjectCard = ({ src, title }: { src: string; title: string }) => {
 
         {/* Title with animation */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 p-6"
+          className="absolute inset-x-0 bottom-0 p-6"
           initial={{ y: 20, opacity: 0 }}
           animate={isHovered ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
           <h3 className="text-xl font-bold text-white">{title}</h3>
-          <p className="text-sm text-violet-300 mt-2">Explorar projeto →</p>
+          <p className="mt-2 text-sm text-violet-300">Explorar projeto →</p>
         </motion.div>
 
         {/* Decorative elements */}
         {isHovered && (
           <motion.div
-            className="absolute top-4 right-4"
+            className="absolute right-4 top-4"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <div className="size-8 rounded-lg border border-violet-400 flex items-center justify-center">
-              <span className="text-violet-400 text-sm">★</span>
+            <div className="flex size-8 items-center justify-center rounded-lg border border-violet-400">
+              <span className="text-sm text-violet-400">★</span>
             </div>
           </motion.div>
         )}
@@ -73,7 +73,7 @@ const ProjectCard = ({ src, title }: { src: string; title: string }) => {
 
       {/* Blur effect on hover */}
       <motion.div
-        className="absolute inset-0 rounded-xl bg-violet-500/10 blur-xl -z-10"
+        className="absolute inset-0 -z-10 rounded-xl bg-violet-500/10 blur-xl"
         animate={
           isHovered ? { opacity: 1, scale: 1.1 } : { opacity: 0, scale: 1 }
         }

@@ -71,7 +71,7 @@ const ProjectDetails = ({
           borderColor: color,
           borderWidth: "1px",
         }}
-        className="py-20 shadow-2xl transition-all rounded-lg group hover:shadow-2xl hover:shadow-violet-500/20"
+        className="group rounded-lg py-20 shadow-2xl transition-all hover:shadow-2xl hover:shadow-violet-500/20"
         whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 10 }}
       >
@@ -82,10 +82,10 @@ const ProjectDetails = ({
             transition={{ delay: 0.1, duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <CardTitle className="text-whiteice group-hover:text-violet-300 transition-colors">
+            <CardTitle className="text-whiteice transition-colors group-hover:text-violet-300">
               {title}
             </CardTitle>
-            <CardDescription className="text-tundora group-hover:text-tundora/80 transition-colors">
+            <CardDescription className="group-hover:text-tundora/80 text-tundora transition-colors">
               {subTitle}
             </CardDescription>
           </motion.div>
@@ -108,7 +108,7 @@ const ProjectDetails = ({
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="text-right font-Silkscreen text-[12px] font-normal uppercase text-whiteice hover:text-violet-300 transition-colors cursor-pointer"
+                className="cursor-pointer text-right font-Silkscreen text-[12px] font-normal uppercase text-whiteice transition-colors hover:text-violet-300"
               >
                 {s}
               </motion.p>

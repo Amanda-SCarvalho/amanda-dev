@@ -24,7 +24,7 @@ const ProjectBtn = ({
     >
       <motion.button
         style={{ backgroundColor: `${active ? color : ""}` }}
-        className="flex size-11 items-center justify-center rounded-full bg-neutral-800 transition-all hover:bg-neutral-700 relative overflow-hidden group"
+        className="group relative flex size-11 items-center justify-center overflow-hidden rounded-full bg-neutral-800 transition-all hover:bg-neutral-700"
         onClick={() => switchActiveProject(id)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}

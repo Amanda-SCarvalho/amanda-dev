@@ -30,7 +30,7 @@ export const socialLinks = [
     id: 'resume',
     icon: '/resume.svg',
     alt: 'Link para o currículo da Amanda Carvalho',
-    path: 'https://drive.google.com/file/d/1YiBWrY2cMZRaHtbeiHZSjYpizlhXqgEr/view?usp=sharing',
+    path: 'https://canva.link/e7mmcq40ewwidr5',
   },
   {
     id: 'github',

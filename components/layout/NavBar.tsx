@@ -86,7 +86,7 @@ const NavbarContent = () => (
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-          <Menu className="text-foreground hover:text-violet-400 transition-colors" />
+          <Menu className="text-foreground transition-colors hover:text-violet-400" />
         </motion.button>
       </SheetTrigger>
       <SheetContent

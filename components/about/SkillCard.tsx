@@ -54,14 +54,14 @@ const SkillCard = ({
 
         {/* Title */}
         <motion.h3
-          className="mb-2 text-base font-semibold text-foreground group-hover:text-violet-400 transition-colors"
+          className="mb-2 text-base font-semibold text-foreground transition-colors group-hover:text-violet-400"
           whileHover={{ x: 5 }}
         >
           {titleLabel}
         </motion.h3>
 
         {/* Description */}
-        <p className="text-sm leading-relaxed text-muted-foreground group-hover:text-foreground/80 transition-colors">
+        <p className="text-sm leading-relaxed text-muted-foreground transition-colors group-hover:text-foreground/80">
           {content}
         </p>
 

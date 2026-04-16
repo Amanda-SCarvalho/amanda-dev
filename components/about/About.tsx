@@ -19,7 +19,7 @@ const About = () => {
   };
 
   return (
-    <section className="relative flex items-center justify-center px-6 py-24 overflow-hidden">
+    <section className="relative flex items-center justify-center overflow-hidden px-6 py-24">
       
       {/* 🔥 Background pattern (CORRIGIDO) */}
       <DotPattern
@@ -28,7 +28,7 @@ const About = () => {
         cx={1}
         cy={1}
         cr={1}
-        className="dot-pattern opacity-30 absolute inset-0 -z-10 pointer-events-none"
+        className="dot-pattern pointer-events-none absolute inset-0 -z-10 opacity-30"
       />
 
       {/* Conteúdo */}
@@ -78,7 +78,7 @@ const About = () => {
 
               {/* Glow */}
               <motion.div
-                className="absolute inset-0 -z-10 scale-110 rounded-full bg-violet-500/20 blur-2xl pointer-events-none"
+                className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full bg-violet-500/20 blur-2xl"
                 animate={{ scale: [1.1, 1.2, 1.1], opacity: [0.2, 0.4, 0.2] }}
                 transition={{ duration: 5, repeat: Infinity }}
               />
