@@ -20,7 +20,7 @@ export const projects = [
     description: `Conecta Atleta é uma plataforma fullstack desenvolvida para conectar atletas, patrocinadores e fãs...`,
     date: 'Mar 10, 2025',
     github: '',
-    live: '',
+    live: 'https://conecta-atleta-seven.vercel.app/',
     color: 'rgba(59,130,246)', // azul
     btnBg: 'rgba(30,64,175,0.5)',
     btnBgHover: 'rgba(15,23,42)',
@@ -41,8 +41,8 @@ export const projects = [
     ],
     description: `Clone do Instagram desenvolvido com foco em replicar a experiência de uma rede social moderna...`,
     date: 'Jan 15, 2025',
-    github: '',
-    live: '',
+    github: 'https://github.com/Amanda-SCarvalho/instagramClone',
+    live: 'https://instagram-clone-five-cyan.vercel.app/',
     color: 'rgba(147,51,234)', // roxo
     btnBg: 'rgba(88,28,135,0.5)',
     btnBgHover: 'rgba(59,7,100)',
@@ -64,7 +64,7 @@ export const projects = [
     description: `Site institucional desenvolvido para uma empresa especializada em elétrica automotiva...`,
     date: 'Feb 5, 2025',
     github: '',
-    live: '',
+    live: 'https://joe-barra-limpa.vercel.app',
     color: 'rgba(234,179,8)', // amarelo
     btnBg: 'rgba(161,98,7,0.5)',
     btnBgHover: 'rgba(120,53,15)',
