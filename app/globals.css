@@ -3,7 +3,18 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950;
+  @apply bg-[#09090b] text-white overflow-x-hidden;
+
+  background-image:
+    radial-gradient(circle at top, rgba(139, 92, 246, 0.15), transparent 35%),
+    radial-gradient(
+      circle at bottom right,
+      rgba(217, 70, 239, 0.1),
+      transparent 30%
+    ),
+    linear-gradient(to bottom, #09090b, #0f0f12);
+
+  background-attachment: fixed;
 }
 
 @layer base {
@@ -110,9 +121,15 @@ body {
   }
 
   .main-mask {
-    mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 100px);
-    background-image: url("/bg-img.png");
-    opacity: 0.2;
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at center, black, transparent 90%);
+    opacity: 0.4;
+    pointer-events: none;
   }
 
   .hero-gradient {

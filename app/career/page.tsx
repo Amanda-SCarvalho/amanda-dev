@@ -3,8 +3,8 @@
 "use client";
 
 import React, { useState } from "react";
-
 import { motion, useMotionValue, useSpring } from "framer-motion";
+
 
 type Status = "mastered" | "learning" | "goal";
 
@@ -16,11 +16,24 @@ interface Tech {
 }
 
 interface Milestone {
-  year: string;
   title: string;
+  subtitle: string;
   description: string;
   techs: string[];
 }
+
+const softSkills = [
+  "Pensamento analítico",
+  "Comunicação clara",
+  "Visão sistêmica",
+  "Resolução de problemas",
+  "Trabalho em equipe",
+  "Adaptabilidade",
+  "Liderança técnica",
+  "Organização e disciplina",
+  "Mentalidade de produto",
+  "Gestão de prioridades",
+];
 
 const techs: Tech[] = [
   {
@@ -28,191 +41,193 @@ const techs: Tech[] = [
     status: "mastered",
     category: "Frontend",
     description:
-      "Base sólida em semântica, acessibilidade, Flexbox, Grid e animações CSS. Construo interfaces do zero sem depender de frameworks.",
+      "Base sólida em semântica, acessibilidade, Flexbox, Grid e animações CSS.",
   },
   {
     name: "JavaScript",
     status: "mastered",
     category: "Frontend",
     description:
-      "Confortável com ES6+, manipulação do DOM, promises e async/await. Familiaridade com os padrões mais comuns do ecossistema.",
+      "Experiência com ES6+, promises, async/await e arquitetura frontend.",
   },
   {
     name: "TypeScript",
     status: "learning",
     category: "Frontend",
     description:
-      "Uso tipagem estática nos meus projetos atuais. Ainda aprofundando generics e tipos avançados no dia a dia.",
+      "Aplicando tipagem forte em aplicações React e Next.js modernas.",
   },
   {
     name: "React",
     status: "mastered",
     category: "Frontend",
     description:
-      "Trabalho com hooks, context API e componentização. Já construí projetos completos com roteamento e gerenciamento de estado.",
+      "Componentização, hooks, context API e construção de interfaces escaláveis.",
   },
   {
     name: "Next.js",
     status: "learning",
     category: "Frontend",
     description:
-      "Estou usando no meu portfólio atual. Aprendendo App Router, SSR, SSG e otimizações de performance.",
+      "SSR, App Router, performance e arquitetura moderna para aplicações web.",
   },
   {
     name: "Tailwind CSS",
     status: "mastered",
     category: "Frontend",
     description:
-      "Minha escolha principal para estilização. Rápido para prototipar e escalar, especialmente com design systems.",
+      "Criação rápida de interfaces consistentes com foco em design systems.",
   },
   {
     name: "Python",
     status: "mastered",
     category: "Backend & Data",
-    description:
-      "Uso para análise de dados, scripts e automações. Boa familiaridade com a linguagem e seu ecossistema.",
+    description: "Automações, análise de dados e desenvolvimento de scripts.",
   },
   {
     name: "SQL",
     status: "mastered",
     category: "Backend & Data",
     description:
-      "Escrevo queries, joins e subqueries com confiança. Experiência com modelagem relacional e bancos como PostgreSQL e MySQL.",
-  },
-  {
-    name: "Pandas",
-    status: "mastered",
-    category: "Backend & Data",
-    description:
-      "Uso para limpeza, transformação e análise de dados tabulares. Principal ferramenta nos meus projetos de dados.",
-  },
-  {
-    name: "Matplotlib",
-    status: "mastered",
-    category: "Backend & Data",
-    description:
-      "Crio visualizações de dados para comunicar insights de forma clara, integrado ao fluxo com Pandas.",
+      "Modelagem relacional, queries avançadas e integração com APIs.",
   },
   {
     name: "Figma",
     status: "mastered",
     category: "Design & Tools",
-    description:
-      "Protótipo interfaces, crio design systems e colaboro com times. Uso componentes, variáveis e auto-layout no fluxo de trabalho.",
-  },
-  {
-    name: "UX/UI Design",
-    status: "mastered",
-    category: "Design & Tools",
-    description:
-      "Entendo hierarquia visual, usabilidade e fluxos de usuário. Consigo transitar entre design e código sem perder coerência.",
+    description: "Criação de interfaces, prototipagem e sistemas de design.",
   },
   {
     name: "Git",
     status: "mastered",
     category: "Design & Tools",
-    description:
-      "Versionamento no dia a dia com branches, pull requests e resolução de conflitos. Trabalho com GitHub em projetos colaborativos.",
+    description: "Versionamento e colaboração em projetos com GitHub.",
   },
   {
     name: "Node.js",
     status: "goal",
     category: "Metas",
-    description:
-      "Quero construir APIs REST robustas e entender o backend JavaScript de ponta a ponta.",
-  },
-  {
-    name: "AWS / Cloud",
-    status: "goal",
-    category: "Metas",
-    description:
-      "Infraestrutura em nuvem é o próximo passo. Quero aprender a hospedar, escalar e monitorar aplicações.",
+    description: "Construção de APIs modernas e arquitetura backend escalável.",
   },
   {
     name: "Docker",
     status: "goal",
     category: "Metas",
     description:
-      "Containers para ambientes reproduzíveis e deploy consistente. Fundamental para um fluxo DevOps saudável.",
+      "Containers e ambientes reproduzíveis para deploy profissional.",
   },
   {
-    name: "Angular",
+    name: "Machine Learning",
     status: "goal",
     category: "Metas",
     description:
-      "Expandir o repertório de frameworks frontend. Angular tem uma arquitetura diferente do React e quero entender esse mundo.",
+      "Aplicação de modelos inteligentes em produtos e análise de dados.",
+  },
+  {
+    name: "Cybersecurity",
+    status: "goal",
+    category: "Metas",
+    description:
+      "Boas práticas de segurança para aplicações, APIs e infraestrutura.",
+  },
+  {
+    name: "React Native",
+    status: "goal",
+    category: "Metas",
+    description:
+      "Desenvolvimento de aplicativos mobile multiplataforma com foco em experiência fluida.",
+  },
+  {
+    name: "System Design",
+    status: "goal",
+    category: "Metas",
+    description:
+      "Projetar aplicações robustas pensando em performance, escalabilidade e manutenção.",
+  },
+  {
+    name: "Three.js",
+    status: "goal",
+    category: "Metas",
+    description:
+      "Experiências web 3D imersivas e interativas para interfaces modernas.",
   },
 ];
 
 const milestones: Milestone[] = [
   {
-    year: "2022",
-    title: "Estagiária em Desenvolvimento",
+    title: "Primeiros sistemas e lógica de interface",
+    subtitle: "Fundamentos",
     description:
-      "Primeiro contato com ambiente profissional. Atuação com HTML, CSS e suporte em pequenos ajustes de interface. Aprendizado de versionamento com Git e trabalho em equipe.",
-    techs: ["HTML & CSS", "Git"],
+      "Construção dos primeiros projetos web com HTML, CSS e JavaScript. Foco em lógica de programação, estrutura de interfaces e entendimento da web como sistema.",
+    techs: ["HTML & CSS", "JavaScript"],
   },
   {
-    year: "2023",
-    title: "Desenvolvedora Frontend Júnior",
+    title: "Desenvolvimento de interfaces escaláveis",
+    subtitle: "Frontend moderno",
     description:
-      "Desenvolvimento de interfaces com JavaScript e React. Criação de componentes reutilizáveis e integração com APIs. Participação ativa em decisões de UI/UX.",
-    techs: ["JavaScript", "React", "UX/UI Design", "Figma"],
+      "Evolução para React com componentização, estados e consumo de APIs. Início da preocupação com UX/UI, organização de código e padrões de interface.",
+    techs: ["React", "Tailwind CSS", "Figma"],
   },
   {
-    year: "2024",
-    title: "Desenvolvedora Frontend Pleno",
+    title: "Arquitetura frontend e tipagem forte",
+    subtitle: "Aplicações profissionais",
     description:
-      "Evolução para projetos mais complexos com TypeScript e Next.js. Foco em performance, organização de código e boas práticas. Início da atuação com dados e backend.",
-    techs: ["TypeScript", "Next.js", "Tailwind CSS", "Python", "SQL"],
+      "Uso de TypeScript e Next.js para construção de aplicações mais robustas. Foco em performance, SSR, organização de arquitetura e integração com backend.",
+    techs: ["TypeScript", "Next.js", "SQL"],
   },
   {
-    year: "2025",
-    title: "Desenvolvedora Fullstack Pleno",
+    title: "Integração de sistemas e backend",
+    subtitle: "Fullstack",
     description:
-      "Atuação fullstack com construção de APIs e integração completa de sistemas. Uso de Node.js, manipulação de banco de dados e deploy em ambientes cloud.",
-    techs: ["Node.js", "SQL", "Python", "AWS / Cloud"],
+      "Atuação no backend com Node.js e construção de APIs. Uso de Python para automações e dados. Estruturação de sistemas completos com banco de dados e lógica de servidor.",
+    techs: ["Node.js", "Python", "SQL"],
   },
   {
-    year: "2026",
-    title: "Desenvolvedora Fullstack Sênior",
+    title: "Sistemas em produção e cloud",
+    subtitle: "Infraestrutura e escalabilidade",
     description:
-      "Responsável por arquitetura de aplicações, decisões técnicas e mentoria de desenvolvedores. Foco em escalabilidade, performance e boas práticas de engenharia.",
-    techs: ["Node.js", "AWS / Cloud", "Docker", "React"],
+      "Estudo e aplicação de Docker, cloud computing e práticas de deploy. Foco em escalabilidade, segurança básica e arquitetura distribuída.",
+    techs: ["Docker", "AWS / Cloud", "Node.js"],
   },
   {
-    year: "2027+",
-    title: "Tech Lead / Especialista",
+    title: "System design e decisões de engenharia",
+    subtitle: "Arquitetura e liderança técnica",
     description:
-      "Liderança técnica de projetos, definição de padrões e colaboração estratégica com produto e design. Evolução contínua em arquitetura e sistemas distribuídos.",
-    techs: ["AWS / Cloud", "Docker", "Node.js", "React"],
+      "Evolução para decisões de arquitetura, design de sistemas e otimização de performance. Visão estratégica sobre produtos e engenharia de software.",
+    techs: ["System Design", "AWS / Cloud", "Docker"],
+  },
+  {
+    title: "Liderança e gestão de tecnologia",
+    subtitle: "Gestão de TI",
+    description:
+      "Atuação em liderança técnica, coordenação de equipes e alinhamento entre produto, design e engenharia. Foco em estratégia e evolução de sistemas em escala.",
+    techs: ["Gestão de TI", "Arquitetura de Sistemas", "Liderança Técnica"],
   },
 ];
 
 const cfg = {
   mastered: {
-    label: "Sei usar",
-    color: "#34d399", // verde suave
-    glow: "rgba(52, 211, 153, 0.25)",
-    border: "rgba(52, 211, 153, 0.25)",
-    borderHover: "rgba(52, 211, 153, 0.6)",
-    bgHover: "rgba(52, 211, 153, 0.08)",
+    label: "Domínio",
+    color: "#34d399",
+    glow: "rgba(52,211,153,0.12)",
+    border: "rgba(52,211,153,0.18)",
+    borderHover: "rgba(52,211,153,0.35)",
   },
+
   learning: {
     label: "Aprendendo",
-    color: "#60a5fa", // azul moderno
-    glow: "rgba(96, 165, 250, 0.25)",
-    border: "rgba(96, 165, 250, 0.25)",
-    borderHover: "rgba(96, 165, 250, 0.6)",
-    bgHover: "rgba(96, 165, 250, 0.08)",
+    color: "#60a5fa",
+    glow: "rgba(96,165,250,0.12)",
+    border: "rgba(96,165,250,0.18)",
+    borderHover: "rgba(96,165,250,0.35)",
   },
+
   goal: {
     label: "Meta",
-    color: "#a78bfa", // mantém roxo da identidade
-    glow: "rgba(167, 139, 250, 0.3)",
-    border: "rgba(167, 139, 250, 0.25)",
-    borderHover: "rgba(167, 139, 250, 0.6)",
-    bgHover: "rgba(167, 139, 250, 0.1)",
+    color: "#a78bfa",
+    glow: "rgba(167,139,250,0.14)",
+    border: "rgba(167,139,250,0.18)",
+    borderHover: "rgba(167,139,250,0.35)",
   },
 } satisfies Record<Status, object>;
 
@@ -233,18 +248,22 @@ export default function CareerMap() {
       ? techs
       : techs.filter((t) => t.category === activeCategory);
 
-  // posição do mouse
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // suavização
-  const smoothX = useSpring(mouseX, { stiffness: 100, damping: 20 });
-  const smoothY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+  const smoothX = useSpring(mouseX, {
+    stiffness: 80,
+    damping: 22,
+  });
+
+  const smoothY = useSpring(mouseY, {
+    stiffness: 80,
+    damping: 22,
+  });
 
   function handleMouseMove(e: React.MouseEvent) {
-    const { clientX, clientY } = e;
-    mouseX.set(clientX);
-    mouseY.set(clientY);
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
   }
 
   const titleVariants = {
@@ -253,7 +272,7 @@ export default function CareerMap() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.1,
+        delay: i * 0.12,
         duration: 0.8,
         ease: "easeOut",
       },
@@ -263,31 +282,70 @@ export default function CareerMap() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+        }
+
         .card-desc {
           font-size: 13px;
-          line-height: 1.65;
-          color: #d8b4fe;
+          line-height: 1.75;
+          color: rgba(255,255,255,0.58);
+          font-weight: 400;
+          letter-spacing: -0.01em;
           overflow: hidden;
           max-height: 0;
           opacity: 0;
-          transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.25s ease;
+          transition:
+            max-height 0.35s ease,
+            opacity 0.25s ease,
+            margin-top 0.25s ease;
           margin-top: 0;
         }
+
         .card-desc.visible {
-          max-height: 140px;
+          max-height: 120px;
           opacity: 1;
-          margin-top: 12px;
+          margin-top: 14px;
         }
-        .tech-card, .goal-card {
-          transition: border-color 0.2s ease, background 0.2s ease,
-                      box-shadow 0.2s ease, transform 0.2s ease;
+
+        button {
+          font-family: inherit;
+          cursor: pointer;
         }
-        button { font-family: inherit; cursor: pointer; }
+
+        .tech-card,
+        .goal-card {
+          transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            box-shadow 0.25s ease,
+            background 0.25s ease;
+        }
+            
       `}</style>
 
       <main style={S.page} onMouseMove={handleMouseMove}>
+        {/* Fundo cinematográfico */}
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: `
+              radial-gradient(circle at top, rgba(124,58,237,0.16), transparent 35%),
+              radial-gradient(circle at bottom right, rgba(168,85,247,0.10), transparent 30%),
+              #050507
+            `,
+            zIndex: -20,
+          }}
+        />
+
+        {/* Glow mouse */}
         <motion.div
           style={{
             x: smoothX,
@@ -295,47 +353,28 @@ export default function CareerMap() {
             translateX: "-50%",
             translateY: "-50%",
           }}
-          className="pointer-events-none fixed -z-10 size-[400px] rounded-full bg-violet-500/20 blur-3xl"
+          className="pointer-events-none fixed -z-10 size-[320px] rounded-full bg-violet-500/10 blur-[100px]"
         />
 
+        {/* Glow lateral */}
         <motion.div
-          className="pointer-events-none fixed -right-32 top-1/2 -z-10 size-[300px] rounded-full bg-purple-500/15 blur-3xl"
-          animate={{ y: [0, 50, 0] }}
+          className="pointer-events-none fixed -right-32 top-1/2 -z-10 size-[240px] rounded-full bg-purple-500/10 blur-[120px]"
+          animate={{ y: [0, 40, 0] }}
           transition={{
-            duration: 8,
+            duration: 10,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         />
-        <div className="pointer-events-none fixed inset-0 -z-10">
-          {new Array(20).fill(null).map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute size-1 rounded-full bg-white/20"
-              animate={{
-                y: [-20, 20],
-                opacity: [0.3, 0.8, 0.3],
-              }}
-              transition={{
-                duration: 5 + Math.random() * 5,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-            />
-          ))}
-        </div>
-        <div style={S.glow1} aria-hidden />
-        <div style={S.glow2} aria-hidden />
-        <div style={S.gridBg} aria-hidden />
+
+        {/* Grid */}
+        <div style={S.gridBg} />
 
         <div style={S.wrap}>
-          {/* ── Header ── */}
+          {/* HEADER */}
           <header style={S.header}>
             <span style={S.eyebrow}>amanda.dev</span>
+
             <motion.h1
               className="text-4xl font-bold leading-tight text-foreground md:text-6xl"
               style={{
@@ -363,10 +402,19 @@ export default function CareerMap() {
                 fullstack
               </motion.div>
             </motion.h1>
-            <p style={S.sub}>
-              O que já construí, o que estou construindo e onde quero chegar.
-              Passe o mouse sobre cada tecnologia para saber mais.
-            </p>
+
+            <div style={S.heroText}>
+              <p style={S.sub}>
+                Desenvolvedora Frontend & Fullstack apaixonada por criar
+                interfaces modernas, acessíveis e intuitivas.
+              </p>
+
+              <p style={S.subSecondary}>
+                Atualmente evoluindo minhas habilidades em backend, cloud
+                computing, infraestrutura e arquitetura de aplicações.
+              </p>
+            </div>
+
             <div style={S.legend}>
               {(Object.entries(cfg) as [Status, (typeof cfg)[Status]][]).map(
                 ([k, v]) => (
@@ -385,11 +433,9 @@ export default function CareerMap() {
             </div>
           </header>
 
-          {/* ── Skills ── */}
+          {/* SKILLS */}
           <section style={S.sec}>
-            <h2 style={S.secLabel}>
-              <span style={S.secLine} /> habilidades
-            </h2>
+            <h2 style={S.secLabel}>habilidades</h2>
 
             <div style={S.filters}>
               {categories.map((cat) => (
@@ -410,6 +456,7 @@ export default function CareerMap() {
               {filtered.map((tech) => {
                 const c = cfg[tech.status];
                 const on = hovered === tech.name;
+
                 return (
                   <button
                     key={tech.name}
@@ -419,9 +466,8 @@ export default function CareerMap() {
                     style={{
                       ...S.card,
                       borderColor: on ? c.borderHover : c.border,
-                      background: on ? c.bgHover : "rgba(255,255,255,0.02)",
-                      boxShadow: on ? `0 0 28px ${c.glow}` : "none",
-                      transform: on ? "translateY(-3px)" : "translateY(0)",
+                      boxShadow: on ? `0 0 18px ${c.glow}` : "none",
+                      transform: on ? "translateY(-2px)" : "translateY(0)",
                     }}
                   >
                     <div style={S.cardRow}>
@@ -429,15 +475,22 @@ export default function CareerMap() {
                         style={{
                           ...S.dot,
                           background: c.color,
-                          boxShadow: `0 0 6px ${c.color}99`,
                         }}
                       />
+
                       <span style={S.cardName}>{tech.name}</span>
-                      <span style={{ ...S.badge, color: c.color }}>
+
+                      <span
+                        style={{
+                          ...S.badge,
+                          color: c.color,
+                        }}
+                      >
                         {c.label}
                       </span>
                     </div>
-                    <div className={`card-desc${on ? " visible" : ""}`}>
+
+                    <div className={`card-desc ${on ? "visible" : ""}`}>
                       {tech.description}
                     </div>
                   </button>
@@ -446,39 +499,30 @@ export default function CareerMap() {
             </div>
           </section>
 
-          {/* ── Timeline ── */}
+          {/* TIMELINE */}
           <section style={S.sec}>
-            <h2 style={S.secLabel}>
-              <span style={S.secLine} /> linha do tempo
-            </h2>
+            <h2 style={S.secLabel}>trajetória</h2>
 
-            <div style={S.tl}>
+            <div style={S.timeline}>
               {milestones.map((m, i) => (
-                <div key={m.year} style={S.tlRow}>
-                  {i < milestones.length - 1 && <div style={S.tlLine} />}
-                  <div style={S.tlBubble}>
-                    <span style={S.tlYear}>{m.year}</span>
-                  </div>
-                  <div style={S.tlBody}>
-                    <h3 style={S.tlTitle}>{m.title}</h3>
-                    <p style={S.tlDesc}>{m.description}</p>
+                <div key={ `${m.title}-${m.subtitle}` } style={S.timelineRow}>
+                  {i < milestones.length - 1 && <div style={S.timelineLine} />}
+
+                  <div style={S.timelineBubble}></div>
+
+                  <div style={S.timelineContent}>
+                    <h3 style={S.timelineTitle}>{m.title}</h3>
+
+                    <p style={S.timelineSubtitle}>{m.subtitle}</p>
+
+                    <p style={S.timelineDesc}>{m.description}</p>
+
                     <div style={S.pills}>
-                      {m.techs.map((name) => {
-                        const t = techs.find((x) => x.name === name);
-                        const c = t ? cfg[t.status] : cfg.goal;
-                        return (
-                          <span
-                            key={name}
-                            style={{
-                              ...S.pill,
-                              color: c.color,
-                              borderColor: c.border,
-                            }}
-                          >
-                            {name}
-                          </span>
-                        );
-                      })}
+                      {m.techs.map((name) => (
+                        <span key={name} style={S.pill}>
+                          {name}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -486,16 +530,39 @@ export default function CareerMap() {
             </div>
           </section>
 
-          {/* ── Goals ── */}
           <section style={S.sec}>
             <h2 style={S.secLabel}>
-              <span style={S.secLine} /> no radar
+              <span style={S.secLine} />
+              soft skills
             </h2>
+
+            <p style={S.softIntro}>
+              Habilidades comportamentais essenciais para evolução em engenharia
+              de software, arquitetura e liderança técnica.
+            </p>
+
+            <div style={S.softGrid}>
+              {softSkills.map((s) => (
+                <div key={s} style={S.softCard}>
+                  {s}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* GOALS */}
+          <section style={S.sec}>
+            <h2 style={S.secLabel}>
+              <span style={S.secLine} />
+              no radar
+            </h2>
+
             <div style={S.goalsGrid}>
               {techs
                 .filter((t) => t.status === "goal")
                 .map((t) => {
                   const on = hovered === t.name;
+
                   return (
                     <button
                       key={t.name}
@@ -512,7 +579,9 @@ export default function CareerMap() {
                       }}
                     >
                       <span style={S.goalGlyph}>◇</span>
+
                       <span style={S.goalName}>{t.name}</span>
+
                       <div
                         className={`card-desc${on ? " visible" : ""}`}
                         style={{ color: "#d8b4fe" }}
@@ -533,224 +602,288 @@ export default function CareerMap() {
 const S: Record<string, React.CSSProperties> = {
   page: {
     minHeight: "100vh",
-    color: "#f3e8ff",
-    fontFamily: "'Syne', system-ui, sans-serif",
+    color: "white",
+    fontFamily: "'Inter', sans-serif",
     position: "relative",
     overflowX: "hidden",
   },
+
   gridBg: {
     position: "fixed",
     inset: 0,
     backgroundImage:
-      "linear-gradient(rgba(167, 139, 250, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(167, 139, 250, 0.05) 1px, transparent 1px)",
+      "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
     backgroundSize: "52px 52px",
     pointerEvents: "none",
-    zIndex: 0,
-  },
-  wrap: {
-    position: "relative",
-    zIndex: 1,
-    maxWidth: 880,
-    margin: "0 auto",
-    padding: "88px 24px 120px",
+    zIndex: -1,
   },
 
-  // Header
-  header: { marginBottom: 80 },
+  wrap: {
+    position: "relative",
+    zIndex: 2,
+    maxWidth: 980,
+    margin: "0 auto",
+    padding: "100px 24px 140px",
+  },
+
+  header: {
+    marginBottom: 90,
+  },
+
   eyebrow: {
     display: "block",
-    fontFamily: "'JetBrains Mono', monospace",
+    marginBottom: 24,
     fontSize: 11,
-    letterSpacing: "0.25em",
-    color: "#a78bfa",
-    textTransform: "uppercase" as const,
-    marginBottom: 20,
+    letterSpacing: "0.24em",
+    textTransform: "uppercase",
+    color: "rgba(255,255,255,0.45)",
   },
-  h1: {
-    fontSize: "clamp(54px, 9vw, 92px)",
-    fontWeight: 800,
-    lineHeight: 0.95,
-    letterSpacing: "-0.04em",
-    color: "#f3e8ff",
-    marginBottom: 28,
-  },
-  accent: {
-    color: "transparent",
-    WebkitTextStroke: "2px #a78bfa",
-    textShadow: "0 0 40px rgba(167, 139, 250, 0.35)",
-  },
+
   sub: {
-    fontSize: 15,
-    lineHeight: 1.75,
-    color: "#c084fc",
-    maxWidth: 500,
-    marginBottom: 36,
+    fontSize: 18,
+    lineHeight: 1.7,
+    color: "rgba(255,255,255,0.82)",
+    fontWeight: 500,
+    letterSpacing: "-0.02em",
   },
-  legend: { display: "flex", gap: 28, flexWrap: "wrap" as const },
+
+  legend: {
+    display: "flex",
+    gap: 24,
+    flexWrap: "wrap",
+  },
+
   legendItem: {
     display: "flex",
     alignItems: "center",
     gap: 8,
     fontSize: 12,
-    color: "#c084fc",
-    fontFamily: "'JetBrains Mono', monospace",
+    color: "rgba(255,255,255,0.55)",
   },
+
   dot: {
     width: 7,
     height: 7,
     borderRadius: "50%",
-    display: "inline-block",
     flexShrink: 0,
   },
 
-  // Section
-  sec: { marginBottom: 76 },
-  secLabel: {
-    display: "flex",
-    alignItems: "center",
-    gap: 12,
-    fontSize: 10,
-    fontFamily: "'JetBrains Mono', monospace",
-    letterSpacing: "0.22em",
-    textTransform: "uppercase" as const,
-    color: "#7c3aed",
-    marginBottom: 28,
-    fontWeight: 400,
-  },
-  secLine: {
-    display: "inline-block",
-    width: 28,
-    height: 1,
-    background: "linear-gradient(to right, #a78bfa, transparent)",
+  sec: {
+    marginBottom: 80,
   },
 
-  // Filters
+  secLabel: {
+    marginBottom: 28,
+    fontSize: 12,
+    letterSpacing: "0.18em",
+    textTransform: "uppercase",
+    color: "rgba(255,255,255,0.42)",
+    fontWeight: 600,
+  },
+
   filters: {
     display: "flex",
-    gap: 8,
-    flexWrap: "wrap" as const,
-    marginBottom: 24,
-  },
-  filterBtn: {
-    padding: "6px 16px",
-    borderRadius: 999,
-    border: "1px solid rgba(167,139,250,0.15)",
-    background: "transparent",
-    color: "#7c3aed",
-    fontSize: 12,
-    letterSpacing: "0.04em",
-    fontFamily: "'JetBrains Mono', monospace",
-    transition: "all 0.15s",
-  },
-  filterOn: {
-    background: "rgba(167, 139, 250, 0.1)",
-    borderColor: "rgba(167, 139, 250, 0.5)",
-    color: "#e9d5ff",
-    boxShadow: "0 0 14px rgba(167, 139, 250, 0.18)",
+    gap: 10,
+    flexWrap: "wrap",
+    marginBottom: 26,
   },
 
-  // Cards
+  filterBtn: {
+    padding: "8px 16px",
+    borderRadius: 999,
+    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(255,255,255,0.03)",
+    color: "rgba(255,255,255,0.55)",
+    fontSize: 12,
+    transition: "0.2s",
+  },
+
+  filterOn: {
+    background: "rgba(255,255,255,0.08)",
+    color: "white",
+    borderColor: "rgba(255,255,255,0.12)",
+  },
+
   cardsGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(232px, 1fr))",
-    gap: 12,
-  },
-  card: {
-    padding: "16px 18px",
-    borderRadius: 14,
-    border: "1px solid",
-    overflow: "hidden",
-  },
-  cardRow: { display: "flex", alignItems: "center", gap: 10 },
-  cardName: {
-    flex: 1,
-    fontSize: 14,
-    fontWeight: 700,
-    color: "#f3e8ff",
-    letterSpacing: "-0.01em",
-  },
-  badge: {
-    fontSize: 10,
-    fontFamily: "'JetBrains Mono', monospace",
-    letterSpacing: "0.1em",
-    textTransform: "uppercase" as const,
-    opacity: 0.85,
+    gridTemplateColumns: "repeat(auto-fill,minmax(240px,1fr))",
+    gap: 14,
   },
 
-  // Timeline
-  tl: { display: "flex", flexDirection: "column" as const },
-  tlRow: { display: "flex", gap: 20, position: "relative", paddingBottom: 44 },
-  tlLine: {
+  card: {
+    padding: "18px",
+    borderRadius: 18,
+    border: "1px solid",
+    background: "rgba(255,255,255,0.025)",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+  },
+
+  cardRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+  },
+
+  cardName: {
+    flex: 1,
+    fontSize: 15,
+    fontWeight: 600,
+    color: "rgba(255,255,255,0.92)",
+  },
+
+  badge: {
+    fontSize: 10,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+  },
+
+  timeline: {
+    display: "flex",
+    flexDirection: "column",
+  },
+
+  timelineRow: {
+    display: "flex",
+    gap: 20,
+    position: "relative",
+    paddingBottom: 44,
+  },
+
+  timelineLine: {
     position: "absolute",
-    left: 18,
-    top: 38,
+    left: 17,
+    top: 40,
     bottom: 0,
     width: 1,
     background:
-      "linear-gradient(to bottom, rgba(167,139,250,0.45), transparent)",
+      "linear-gradient(to bottom, rgba(255,255,255,0.12), transparent)",
   },
-  tlBubble: {
-    width: 38,
-    height: 38,
+
+  timelineBubble: {
+    width: 36,
+    height: 36,
     borderRadius: "50%",
-    border: "1px solid rgba(167, 139, 250, 0.35)",
-    background: "rgba(167, 139, 250, 0.08)",
+    border: "1px solid rgba(255,255,255,0.12)",
+    background: "rgba(255,255,255,0.04)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
-    boxShadow: "0 0 14px rgba(167,139,250,0.12)",
-  },
-  tlYear: {
-    fontSize: 10,
-    fontFamily: "'JetBrains Mono', monospace",
-    color: "#a78bfa",
-    letterSpacing: "0.06em",
-  },
-  tlBody: { flex: 1, paddingTop: 6 },
-  tlTitle: {
-    fontSize: 18,
-    fontWeight: 700,
-    color: "#f3e8ff",
-    letterSpacing: "-0.02em",
-    marginBottom: 8,
-  },
-  tlDesc: { fontSize: 14, color: "#c084fc", lineHeight: 1.6, marginBottom: 14 },
-  pills: { display: "flex", gap: 8, flexWrap: "wrap" as const },
-  pill: {
-    fontSize: 11,
-    fontFamily: "'JetBrains Mono', monospace",
-    padding: "3px 10px",
-    borderRadius: 999,
-    border: "1px solid",
-    background: "transparent",
   },
 
-  // Goals
+  timelineYear: {
+    fontSize: 10,
+    color: "rgba(255,255,255,0.62)",
+  },
+
+  timelineContent: {
+    flex: 1,
+    paddingTop: 4,
+  },
+
+  timelineTitle: {
+    fontSize: 20,
+    fontWeight: 700,
+    color: "rgba(255,255,255,0.92)",
+    marginBottom: 10,
+  },
+
+  timelineDesc: {
+    fontSize: 14,
+    lineHeight: 1.7,
+    color: "rgba(255,255,255,0.58)",
+    marginBottom: 14,
+  },
+
+  pills: {
+    display: "flex",
+    gap: 8,
+    flexWrap: "wrap",
+  },
+
+  pill: {
+    padding: "6px 12px",
+    borderRadius: 999,
+    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(255,255,255,0.03)",
+    fontSize: 11,
+    color: "rgba(255,255,255,0.62)",
+  },
+
   goalsGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))",
-    gap: 12,
+    gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))",
+    gap: 14,
   },
+
   goalCard: {
-    padding: "22px 20px",
-    borderRadius: 14,
-    border: "1px dashed",
-    background: "rgba(232,121,249,0.03)",
-    overflow: "hidden",
+    padding: "22px",
+    borderRadius: 18,
+    border: "1px solid",
+    background: "rgba(255,255,255,0.025)",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
   },
+
   goalGlyph: {
     display: "block",
-    fontSize: 18,
-    color: "#a78bfa",
-    marginBottom: 8,
-    opacity: 0.65,
+    marginBottom: 10,
+    color: "#c4b5fd",
+    opacity: 0.7,
   },
+
   goalName: {
     display: "block",
+    fontSize: 16,
+    fontWeight: 600,
+    color: "rgba(255,255,255,0.92)",
+  },
+
+  heroText: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 14,
+    marginBottom: 42,
+    maxWidth: 620,
+  },
+
+  subSecondary: {
     fontSize: 15,
-    fontWeight: 700,
-    color: "#f3e8ff",
+    lineHeight: 1.85,
+    color: "rgba(255,255,255,0.52)",
+    fontWeight: 400,
     letterSpacing: "-0.01em",
   },
+  timelineSubtitle: {
+    fontSize: 12,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "rgba(255,255,255,0.45)",
+    marginBottom: 6,
+    fontWeight: 500,
+  },
+  softIntro: {
+  fontSize: 14,
+  lineHeight: 1.8,
+  color: "rgba(255,255,255,0.58)",
+  maxWidth: 600,
+  marginBottom: 24,
+},
+
+softGrid: {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill, minmax(200px,1fr))",
+  gap: 12,
+},
+
+softCard: {
+  padding: "14px 16px",
+  borderRadius: 14,
+  border: "1px solid rgba(255,255,255,0.08)",
+  background: "rgba(255,255,255,0.02)",
+  color: "rgba(255,255,255,0.75)",
+  fontSize: 13,
+  transition: "0.2s",
+}
 };

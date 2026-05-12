@@ -17,10 +17,10 @@ const ProjectCard = ({ src, title }: { src: string; title: string }) => {
     >
       {/* Glow animado */}
       <motion.div
-        className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-violet-500 via-purple-500 to-violet-500 p-[1px]"
+        className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-violet-500 via-purple-500 to-violet-500 p-px"
         animate={{ opacity: isHovered ? 1 : 0.3 }}
       >
-        <div className="w-full h-full rounded-2xl bg-neutral-900" />
+        <div className="size-full rounded-2xl bg-neutral-900" />
       </motion.div>
 
       {/* Card */}
@@ -28,7 +28,7 @@ const ProjectCard = ({ src, title }: { src: string; title: string }) => {
         
         {/* Moldura estilo notebook */}
         <div className="bg-neutral-800 p-2">
-          <div className="relative w-full aspect-video overflow-hidden rounded-lg bg-black">
+          <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black">
             
             {/* IMAGEM CORRIGIDA */}
             <Image
