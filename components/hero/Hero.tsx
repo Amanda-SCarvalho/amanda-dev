@@ -5,41 +5,32 @@ import Link from "next/link";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function Hero() {
-  // posição do mouse
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // suavização (efeito fluido)
-  const smoothX = useSpring(mouseX, { stiffness: 100, damping: 20 });
-  const smoothY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+  const smoothX = useSpring(mouseX, {
+    stiffness: 90,
+    damping: 24,
+  });
+
+  const smoothY = useSpring(mouseY, {
+    stiffness: 90,
+    damping: 24,
+  });
 
   function handleMouseMove(e: React.MouseEvent) {
-    const { clientX, clientY } = e;
-    mouseX.set(clientX);
-    mouseY.set(clientY);
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
   }
 
   const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 24 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.1,
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    }),
-  };
-
-  const badgeVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: (i: number) => ({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delay: 0.5 + i * 0.1,
-        duration: 0.6,
+        delay: i * 0.12,
+        duration: 0.9,
         ease: "easeOut",
       },
     }),
@@ -51,33 +42,26 @@ export default function Hero() {
       role="none"
       className="relative flex min-h-screen items-center overflow-hidden px-6"
     >
-      {/* Background */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950" />
+      {/* Fundo */}
+      <div className="absolute inset-0 -z-30 bg-[#050507]" />
 
-      {/* Animated stars background */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        {new Array(20).fill(null).map((_, i) => (
-          <motion.div
-            key={`star-${i}`}
-            className="absolute size-1 rounded-full bg-white/20"
-            animate={{
-              y: [-20, 20],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 5 + Math.random() * 5,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Video background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover opacity-40 -z-20"
+      >
+        <source src="/videos/blackhole.webm" type="video/webm" />
+      </video>
 
-      {/* Primary glow que segue o mouse */}
+      {/* Overlay cinematico */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.10),transparent_30%)]" />
+
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.08),transparent_30%)]" />
+
+      {/* Glow mouse */}
       <motion.div
         style={{
           x: smoothX,
@@ -85,141 +69,163 @@ export default function Hero() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        className="pointer-events-none absolute -z-10 size-[400px] rounded-full bg-violet-500/20 blur-3xl"
+        className="pointer-events-none absolute -z-10 size-[380px] rounded-full bg-violet-500/10 blur-[120px]"
       />
 
-      {/* Secondary glow */}
+      {/* Glow lateral */}
       <motion.div
-        className="pointer-events-none absolute -right-32 top-1/2 -z-10 size-[300px] rounded-full bg-purple-500/15 blur-3xl"
+        className="pointer-events-none absolute -right-40 top-1/2 -z-10 size-[260px] rounded-full bg-purple-500/10 blur-[120px]"
         animate={{
-          y: [0, 50, 0],
+          y: [0, 40, 0],
         }}
         transition={{
-          duration: 8,
+          duration: 10,
           repeat: Infinity,
           ease: "easeInOut",
         }}
       />
 
-      <div className="mx-auto w-full max-w-6xl">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
         <div className="max-w-3xl">
-          {/* Animated title */}
+
+
+          {/* Title */}
           <motion.h1
-            className="text-4xl font-bold leading-tight text-foreground md:text-6xl"
+            className="text-5xl font-bold leading-[0.95] -tracking-wider text-white md:text-7xl"
+            style={{
+              fontFamily: "'Syne', sans-serif",
+            }}
             initial="hidden"
             animate="visible"
           >
             <motion.div custom={0} variants={titleVariants}>
-              Desenvolvendo interfaces
+              Criando produtos
             </motion.div>
+
             <motion.div
               custom={1}
               variants={titleVariants}
               className="text-violet-400"
             >
-              que fazem sentido
+              modernos,
             </motion.div>
+
             <motion.div custom={2} variants={titleVariants}>
-              para pessoas e negócios
+              acessíveis e
+            </motion.div>
+
+            <motion.div custom={3} variants={titleVariants}>
+              escaláveis
             </motion.div>
           </motion.h1>
 
-          {/* Animated paragraph */}
+          {/* Subtexto */}
           <motion.p
-            className="mt-6 text-lg text-muted-foreground md:text-xl"
+            className="mt-8 max-w-2xl text-lg leading-relaxed text-white/55 md:text-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{
+              delay: 0.35,
+              duration: 0.8,
+            }}
           >
-            Sou <strong className="text-violet-400">Amanda Carvalho</strong>,
-            desenvolvedora frontend/fullstack. Crio aplicações modernas,
-            performáticas e bem estruturadas, focadas em experiência e
-            resultado.
+            Desenvolvedora frontend/fullstack apaixonada por criar interfaces
+            modernas, intuitivas e performáticas. Atualmente aprofundando
+            conhecimentos em backend, cloud computing, infraestrutura e
+            arquitetura de sistemas.
           </motion.p>
 
-          {/* Animated buttons */}
+          {/* Buttons */}
           <motion.div
-            className="mt-10 flex w-fit flex-col gap-4 sm:flex-row"
+            className="mt-12 flex flex-col gap-4 sm:flex-row"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            transition={{
+              delay: 0.5,
+              duration: 0.8,
+            }}
           >
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 10 }}
-            >
+            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
               <Link
                 href="#projects"
-                className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-violet-500 to-violet-600 px-8 py-3 text-base font-semibold text-white shadow-lg shadow-violet-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/50"
+                className="group flex items-center gap-3 rounded-xl border border-violet-500/20 bg-violet-500/10 px-7 py-3 text-sm font-medium text-white backdrop-blur-xl transition-all duration-300 hover:border-violet-400/40 hover:bg-violet-500/15"
               >
                 Ver projetos
                 <motion.span
                   animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="text-lg"
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                  }}
                 >
                   →
                 </motion.span>
               </Link>
             </motion.div>
 
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
               <Link
                 href="#contact"
-                className="flex items-center justify-center rounded-lg border border-white/20 px-8 py-3 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-violet-500/50 hover:bg-white/5"
+                className="rounded-xl border border-white/10 bg-white/[0.03] px-7 py-3 text-sm font-medium text-white/80 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
               >
                 Falar comigo
               </Link>
             </motion.div>
           </motion.div>
 
-          {/* Animated badges */}
+          {/* Skills badges */}
           <motion.div
             className="mt-12 flex flex-wrap gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            transition={{
+              delay: 0.7,
+              duration: 0.8,
+            }}
           >
             {[
-              "UI moderna",
-              "Código limpo",
-              "Performance",
-              "UX & acessibilidade",
-            ].map((badge, i) => (
-              <motion.span
-                key={badge}
-                custom={i}
-                variants={badgeVariants}
-                initial="hidden"
-                animate="visible"
-                className="cursor-pointer rounded-full border border-violet-500/30 bg-violet-500/5 px-4 py-2 text-sm font-medium uppercase tracking-wider text-violet-300 backdrop-blur-sm transition-all hover:border-violet-500/60 hover:bg-violet-500/10"
+              "React",
+              "Next.js",
+              "TypeScript",
+              "UI/UX",
+              "Node.js",
+              "Cloud",
+            ].map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs uppercase tracking-[0.18em] text-white/45 backdrop-blur-xl"
               >
-                {badge}
-              </motion.span>
+                {item}
+              </span>
             ))}
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+        }}
       >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-xs uppercase tracking-widest text-muted-foreground">
+        <div className="flex flex-col items-center gap-3">
+          <span className="text-[10px] uppercase tracking-[0.28em] text-white/35">
             Scroll
           </span>
-          <div className="flex size-6 items-center justify-center rounded-full border border-violet-500/30">
+
+          <div className="flex h-10 w-6 items-start justify-center rounded-full border border-white/10 p-1">
             <motion.div
-              className="size-1 rounded-full bg-violet-400"
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="h-2 w-2 rounded-full bg-violet-400"
+              animate={{
+                y: [0, 18, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
             />
           </div>
         </div>

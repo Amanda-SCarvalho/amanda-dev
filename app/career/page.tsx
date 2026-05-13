@@ -5,7 +5,6 @@
 import React, { useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
-
 type Status = "mastered" | "learning" | "goal";
 
 interface Tech {
@@ -16,9 +15,13 @@ interface Tech {
 }
 
 interface Milestone {
+  role: string;
+  level: string;
+
   title: string;
   subtitle: string;
   description: string;
+
   techs: string[];
 }
 
@@ -155,53 +158,73 @@ const techs: Tech[] = [
 
 const milestones: Milestone[] = [
   {
+    role: "Estagiária",
+    level: "Início",
     title: "Primeiros sistemas e lógica de interface",
     subtitle: "Fundamentos",
     description:
-      "Construção dos primeiros projetos web com HTML, CSS e JavaScript. Foco em lógica de programação, estrutura de interfaces e entendimento da web como sistema.",
+      "Construção dos primeiros projetos web com HTML, CSS e JavaScript.",
     techs: ["HTML & CSS", "JavaScript"],
   },
+
   {
-    title: "Desenvolvimento de interfaces escaláveis",
+    role: "Desenvolvedora Frontend Júnior",
+    level: "Jr",
+    title: "Desenvolvimento de interfaces modernas",
     subtitle: "Frontend moderno",
     description:
-      "Evolução para React com componentização, estados e consumo de APIs. Início da preocupação com UX/UI, organização de código e padrões de interface.",
+      "Evolução para React com componentização e consumo de APIs.",
     techs: ["React", "Tailwind CSS", "Figma"],
   },
+
   {
+    role: "Desenvolvedora Frontend Pleno",
+    level: "Pleno",
     title: "Arquitetura frontend e tipagem forte",
     subtitle: "Aplicações profissionais",
     description:
-      "Uso de TypeScript e Next.js para construção de aplicações mais robustas. Foco em performance, SSR, organização de arquitetura e integração com backend.",
+      "Uso de TypeScript e Next.js em aplicações robustas.",
     techs: ["TypeScript", "Next.js", "SQL"],
   },
+
   {
+    role: "Desenvolvedora Fullstack",
+    level: "Fullstack",
     title: "Integração de sistemas e backend",
-    subtitle: "Fullstack",
+    subtitle: "Backend & APIs",
     description:
-      "Atuação no backend com Node.js e construção de APIs. Uso de Python para automações e dados. Estruturação de sistemas completos com banco de dados e lógica de servidor.",
+      "Construção de APIs e integração completa entre frontend e backend.",
     techs: ["Node.js", "Python", "SQL"],
   },
+
   {
-    title: "Sistemas em produção e cloud",
-    subtitle: "Infraestrutura e escalabilidade",
+    role: "Software Engineer",
+    level: "Sr",
+    title: "Infraestrutura e escalabilidade",
+    subtitle: "Cloud & DevOps",
     description:
-      "Estudo e aplicação de Docker, cloud computing e práticas de deploy. Foco em escalabilidade, segurança básica e arquitetura distribuída.",
-    techs: ["Docker", "AWS / Cloud", "Node.js"],
+      "Deploy, Docker, cloud computing e escalabilidade.",
+    techs: ["Docker", "AWS", "CI/CD"],
   },
+
   {
-    title: "System design e decisões de engenharia",
-    subtitle: "Arquitetura e liderança técnica",
+    role: "Tech Lead",
+    level: "Lead",
+    title: "Arquitetura e liderança técnica",
+    subtitle: "System Design",
     description:
-      "Evolução para decisões de arquitetura, design de sistemas e otimização de performance. Visão estratégica sobre produtos e engenharia de software.",
-    techs: ["System Design", "AWS / Cloud", "Docker"],
+      "Decisões de arquitetura e liderança de times e produtos.",
+    techs: ["System Design", "Cloud", "Leadership"],
   },
+
   {
-    title: "Liderança e gestão de tecnologia",
-    subtitle: "Gestão de TI",
+    role: "Engineering Manager",
+    level: "Manager",
+    title: "Gestão estratégica de tecnologia",
+    subtitle: "Liderança",
     description:
-      "Atuação em liderança técnica, coordenação de equipes e alinhamento entre produto, design e engenharia. Foco em estratégia e evolução de sistemas em escala.",
-    techs: ["Gestão de TI", "Arquitetura de Sistemas", "Liderança Técnica"],
+      "Gestão de equipes, estratégia e evolução de produtos digitais.",
+    techs: ["Gestão", "Produto", "Arquitetura"],
   },
 ];
 
@@ -337,13 +360,56 @@ export default function CareerMap() {
             position: "fixed",
             inset: 0,
             background: `
-              radial-gradient(circle at top, rgba(124,58,237,0.16), transparent 35%),
-              radial-gradient(circle at bottom right, rgba(168,85,247,0.10), transparent 30%),
-              #050507
-            `,
+  radial-gradient(circle at top, rgba(120,119,198,0.10), transparent 30%),
+  radial-gradient(circle at bottom right, rgba(168,85,247,0.06), transparent 25%),
+  #030303
+`,
             zIndex: -20,
           }}
         />
+
+        {/* Stars background */}
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: -15,
+            pointerEvents: "none",
+            overflow: "hidden",
+          }}
+        >
+          {Array.from({ length: 80 }).map((_, i) => {
+            const size = Math.random() * 2 + 1;
+
+            return (
+              <motion.div
+                key={i}
+                animate={{
+                  y: [0, -40, 0],
+                  opacity: [0.15, 0.8, 0.15],
+                  scale: [1, 1.4, 1],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 8,
+                  repeat: Infinity,
+                  delay: Math.random() * 5,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  position: "absolute",
+                  width: size,
+                  height: size,
+                  borderRadius: "50%",
+                  background: "white",
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  opacity: 0.4,
+                  boxShadow: "0 0 12px rgba(255,255,255,0.35)",
+                }}
+              />
+            );
+          })}
+        </div>
 
         {/* Glow mouse */}
         <motion.div
@@ -368,7 +434,13 @@ export default function CareerMap() {
         />
 
         {/* Grid */}
-        <div style={S.gridBg} />
+        <div
+          style={{
+            ...S.gridBg,
+            filter: "blur(0.2px)",
+            opacity: 0.7,
+          }}
+        />
 
         <div style={S.wrap}>
           {/* HEADER */}
@@ -505,12 +577,17 @@ export default function CareerMap() {
 
             <div style={S.timeline}>
               {milestones.map((m, i) => (
-                <div key={ `${m.title}-${m.subtitle}` } style={S.timelineRow}>
+                <div key={`${m.title}-${m.subtitle}`} style={S.timelineRow}>
                   {i < milestones.length - 1 && <div style={S.timelineLine} />}
 
-                  <div style={S.timelineBubble}></div>
+                  <div style={S.timelineBubble}>
+                    <div style={S.timelineBubbleInner}>
+                      <span style={S.timelineLevel}>{m.level}</span>
+                    </div>
+                  </div>
 
                   <div style={S.timelineContent}>
+                    <span style={S.timelineRole}>{m.role}</span>
                     <h3 style={S.timelineTitle}>{m.title}</h3>
 
                     <p style={S.timelineSubtitle}>{m.subtitle}</p>
@@ -612,7 +689,7 @@ const S: Record<string, React.CSSProperties> = {
     position: "fixed",
     inset: 0,
     backgroundImage:
-      "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+      "linear-gradient(rgba(255,255,255,0.015)) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015)) 1px, transparent 1px)",
     backgroundSize: "52px 52px",
     pointerEvents: "none",
     zIndex: -1,
@@ -692,7 +769,7 @@ const S: Record<string, React.CSSProperties> = {
     padding: "8px 16px",
     borderRadius: 999,
     border: "1px solid rgba(255,255,255,0.08)",
-    background: "rgba(255,255,255,0.03)",
+    background: "rgba(255,255,255,0.015))",
     color: "rgba(255,255,255,0.55)",
     fontSize: 12,
     transition: "0.2s",
@@ -760,17 +837,56 @@ const S: Record<string, React.CSSProperties> = {
       "linear-gradient(to bottom, rgba(255,255,255,0.12), transparent)",
   },
 
-  timelineBubble: {
-    width: 36,
-    height: 36,
-    borderRadius: "50%",
-    border: "1px solid rgba(255,255,255,0.12)",
-    background: "rgba(255,255,255,0.04)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-  },
+timelineBubble: {
+  width: 56,
+  height: 56,
+  borderRadius: "50%",
+  border: "1px solid rgba(167,139,250,0.25)",
+  background:
+    "radial-gradient(circle at top, rgba(167,139,250,0.18), rgba(255,255,255,0.03))",
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexShrink: 0,
+  boxShadow: "0 0 30px rgba(167,139,250,0.12)",
+},
+
+timelineBubbleInner: {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 2,
+},
+
+timelineIcon: {
+  fontSize: 14,
+  color: "#c4b5fd",
+  lineHeight: 1,
+},
+
+timelineLevel: {
+  fontSize: 10,
+  fontWeight: 700,
+  letterSpacing: "0.08em",
+  textTransform: "uppercase",
+  color: "rgba(255,255,255,0.72)",
+},
+
+timelineRole: {
+  display: "inline-flex",
+  padding: "6px 12px",
+  borderRadius: 999,
+  background: "rgba(167,139,250,0.10)",
+  border: "1px solid rgba(167,139,250,0.18)",
+  color: "#c4b5fd",
+  fontSize: 11,
+  fontWeight: 600,
+  letterSpacing: "0.08em",
+  textTransform: "uppercase",
+  marginBottom: 14,
+},
 
   timelineYear: {
     fontSize: 10,
@@ -806,7 +922,7 @@ const S: Record<string, React.CSSProperties> = {
     padding: "6px 12px",
     borderRadius: 999,
     border: "1px solid rgba(255,255,255,0.08)",
-    background: "rgba(255,255,255,0.03)",
+    background: "rgba(255,255,255,0.015))",
     fontSize: 11,
     color: "rgba(255,255,255,0.62)",
   },
@@ -864,26 +980,26 @@ const S: Record<string, React.CSSProperties> = {
     fontWeight: 500,
   },
   softIntro: {
-  fontSize: 14,
-  lineHeight: 1.8,
-  color: "rgba(255,255,255,0.58)",
-  maxWidth: 600,
-  marginBottom: 24,
-},
+    fontSize: 14,
+    lineHeight: 1.8,
+    color: "rgba(255,255,255,0.58)",
+    maxWidth: 600,
+    marginBottom: 24,
+  },
 
-softGrid: {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(200px,1fr))",
-  gap: 12,
-},
+  softGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(200px,1fr))",
+    gap: 12,
+  },
 
-softCard: {
-  padding: "14px 16px",
-  borderRadius: 14,
-  border: "1px solid rgba(255,255,255,0.08)",
-  background: "rgba(255,255,255,0.02)",
-  color: "rgba(255,255,255,0.75)",
-  fontSize: 13,
-  transition: "0.2s",
-}
+  softCard: {
+    padding: "14px 16px",
+    borderRadius: 14,
+    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(255,255,255,0.02)",
+    color: "rgba(255,255,255,0.75)",
+    fontSize: 13,
+    transition: "0.2s",
+  },
 };
