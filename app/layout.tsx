@@ -58,7 +58,7 @@ export const metadata: Metadata = {
       'Portfólio de Amanda Carvalho, desenvolvedora frontend/fullstack focada em interfaces modernas, performance e experiência do usuário.',
     images: [
       {
-        url: '/opengraph-image.jpg',
+        url: '/preview.png',
         width: 1200,
         height: 630,
         alt: 'Amanda Carvalho · Frontend Developer',
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     title: 'Amanda Carvalho · Frontend Developer',
     description:
       'Desenvolvedora frontend/fullstack criando experiências digitais modernas, acessíveis e escaláveis.',
-    images: ['/opengraph-image.jpg'],
+    images: ['/preview.png'],
   },
 };
 
