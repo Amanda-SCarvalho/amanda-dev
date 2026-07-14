@@ -157,7 +157,7 @@ const ProjectDetails = ({
                 onMouseLeave={() => setHoveredId("")}
                 className="transition-all hover:shadow-lg"
               >
-                <Link href={github} target="_blank">
+                <Link href={github} target="_blank" rel="noopener noreferrer">
                   <span className="flex items-center gap-1">
                     Github{" "}
                     <motion.span
@@ -189,7 +189,7 @@ const ProjectDetails = ({
               onMouseLeave={() => setHoveredId("")}
               className="transition-all hover:shadow-lg"
             >
-              <Link href={live} target="_blank">
+              <Link href={live} target="_blank" rel="noopener noreferrer">
                 <span className="flex items-center gap-1">
                   Live{" "}
                   <motion.span

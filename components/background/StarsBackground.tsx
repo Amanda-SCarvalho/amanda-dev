@@ -10,7 +10,7 @@ function Stars(props: any) {
   const ref = useRef<PointsType>(null);
 
   const [sphere] = useState(() =>
-    random.inSphere(new Float32Array(4000), { radius: 1.4 }),
+    random.inSphere(new Float32Array(3000), { radius: 1.4 }),
   );
 
   useFrame((_, delta) => {
@@ -22,13 +22,7 @@ function Stars(props: any) {
 
   return (
     <group rotation={[0, 0, Math.PI / 6]}>
-      <Points
-        ref={ref}
-        positions={sphere}
-        stride={3}
-        frustumCulled
-        {...props}
-      >
+      <Points ref={ref} positions={sphere} stride={3} frustumCulled {...props}>
         <PointMaterial
           transparent
           color="#ffffff"

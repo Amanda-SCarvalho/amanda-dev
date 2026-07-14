@@ -85,6 +85,7 @@ const NavbarContent = () => (
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          aria-label="Abrir menu"
         >
           <Menu className="text-foreground transition-colors hover:text-violet-400" />
         </motion.button>

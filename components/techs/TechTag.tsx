@@ -1,40 +1,64 @@
-/* eslint-disable tailwindcss/no-custom-classname */
-/* eslint-disable tailwindcss/classnames-order */
 "use client";
 
-import { motion } from "framer-motion";
-
 interface TechTagProps {
-  title: string;
+  name: string;
+  status?: "mastered" | "learning";
+  note?: string;
 }
 
-const TechTag = ({ title }: TechTagProps) => {
-  return (
-    <motion.span
-      className="group relative rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-muted-foreground cursor-pointer overflow-hidden transition-all hover:border-violet-500/40 hover:text-violet-400 backdrop-blur-sm"
-      whileHover={{
-        scale: 1.05,
-        borderColor: "rgba(167, 139, 250, 0.4)",
-      }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-    >
-      {/* Shine effect on hover */}
-      <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100"
-        style={{
-          background:
-            "linear-gradient(45deg, transparent 30%, rgba(167, 139, 250, 0.15) 50%, transparent 70%)",
-          backgroundSize: "200% 200%",
-        }}
-        animate={{
-          backgroundPosition: ["200% 200%", "-200% -200%"],
-        }}
-        transition={{ duration: 2, repeat: Infinity }}
-      />
+const statusConfig = {
+  mastered: {
+    label: "Domínio",
+    dot: "bg-emerald-400",
+    text: "text-emerald-300",
+  },
+  learning: {
+    label: "Aprendendo",
+    dot: "bg-blue-400",
+    text: "text-blue-300",
+  },
+} as const;
 
-      <span className="relative">{title}</span>
-    </motion.span>
+const TechTag = ({ name, status, note }: TechTagProps) => {
+  const cfg = status ? statusConfig[status] : null;
+
+  const header = (
+    <div className="flex w-full items-center gap-2.5 px-3.5 py-2.5">
+      <span
+        className={`size-1.5 shrink-0 rounded-full ${
+          cfg ? cfg.dot : "bg-white/25"
+        }`}
+      />
+      <span className="flex-1 text-left text-sm font-medium text-white/90">
+        {name}
+      </span>
+      {cfg && (
+        <span
+          className={`shrink-0 text-[10px] font-medium uppercase tracking-[0.08em] ${cfg.text}`}
+        >
+          {cfg.label}
+        </span>
+      )}
+    </div>
+  );
+
+  if (!note) {
+    return (
+      <div className="rounded-xl border border-white/10 bg-white/[0.02]">
+        {header}
+      </div>
+    );
+  }
+
+  return (
+    <details className="group rounded-xl border border-white/10 bg-white/[0.02] transition-colors open:border-white/20 open:bg-white/[0.04]">
+      <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+        {header}
+      </summary>
+      <p className="px-3.5 pb-3 text-xs leading-relaxed text-white/50">
+        {note}
+      </p>
+    </details>
   );
 };
 

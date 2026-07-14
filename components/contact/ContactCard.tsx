@@ -22,7 +22,7 @@ type Props = {
 
 const ContactCard = ({ title, icon, description, path }: Props) => {
   return (
-    <Link href={path} target="_blank">
+    <Link href={path} target="_blank" rel="noopener noreferrer">
       <motion.div
         whileHover={{ y: -10 }}
         whileTap={{ scale: 0.98 }}
@@ -67,7 +67,6 @@ const ContactCard = ({ title, icon, description, path }: Props) => {
           {/* Header */}
           <CardHeader className="relative z-10">
             <div className="mb-6 flex items-center justify-between">
-              
               {/* Ícone */}
               <motion.div
                 whileHover={{

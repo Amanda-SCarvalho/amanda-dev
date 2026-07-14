@@ -6,16 +6,12 @@ import { motion } from "framer-motion";
 
 const Contact = () => {
   return (
-    <section className="relative overflow-hidden px-6 py-32">
-      
-      {/* Glow de fundo */}
+    <section id="contact" className="relative overflow-hidden px-6 py-32">
       <div className="absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 size-[500px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-[140px]" />
-        
         <div className="absolute bottom-0 right-0 size-[350px] rounded-full bg-fuchsia-500/10 blur-[120px]" />
       </div>
 
-      {/* Header */}
       <motion.div
         className="mx-auto mb-20 max-w-4xl text-center"
         initial={{ opacity: 0, y: 40 }}
@@ -33,21 +29,15 @@ const Contact = () => {
         </motion.p>
 
         <h2 className="mb-6 text-4xl font-bold leading-tight text-white md:text-6xl">
-          Vamos criar algo
-          <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
-            {" "}
-            inesquecível
-          </span>
+          Vamos construir algo incrível juntos.
         </h2>
 
         <p className="mx-auto max-w-2xl text-lg leading-relaxed text-zinc-400">
-          Estou disponível para freelas, colaborações,
-          projetos criativos e oportunidades para criar
-          experiências digitais incríveis.
+          Estou em busca de oportunidades de estágio e projetos desafiadores nas
+          áreas de Desenvolvimento Full Stack, UX/UI e Tecnologia.
         </p>
       </motion.div>
 
-      {/* Cards */}
       <motion.div
         className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-3"
         initial="hidden"
@@ -79,9 +69,7 @@ const Contact = () => {
                 },
               },
             }}
-            whileHover={{
-              y: -8,
-            }}
+            whileHover={{ y: -8 }}
           >
             <ContactCard
               title={contact.title}
@@ -91,19 +79,6 @@ const Contact = () => {
             />
           </motion.div>
         ))}
-      </motion.div>
-
-      {/* Rodapé */}
-      <motion.div
-        className="mt-20 text-center"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        viewport={{ once: true }}
-      >
-        <p className="text-sm text-zinc-500">
-          Disponível para projetos no Brasil e no mundo 🌍
-        </p>
       </motion.div>
     </section>
   );

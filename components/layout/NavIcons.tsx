@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 const NavIcons = () => {
   return (
@@ -8,6 +8,7 @@ const NavIcons = () => {
         href="https://github.com/amanda-scarvalho"
         className="group flex items-center justify-center gap-x-1.5"
         target="_blank"
+        rel="noopener noreferrer"
       >
         <Image
           src="/github.svg"
@@ -23,6 +24,7 @@ const NavIcons = () => {
         href="https://www.linkedin.com/in/amanda-scarvalho/"
         className="group flex items-center justify-center gap-x-1.5"
         target="_blank"
+        rel="noopener noreferrer"
       >
         <Image
           src="/linkedin.svg"

@@ -37,9 +37,7 @@ const ProjectsGallery = () => {
           {/* conteúdo */}
           <div className="absolute inset-0 flex flex-col justify-end p-6">
             <div className="translate-y-6 transition duration-500 group-hover:translate-y-0">
-              <p className="mb-2 text-sm text-violet-300">
-                {project.subTitle}
-              </p>
+              <p className="mb-2 text-sm text-violet-300">{project.subTitle}</p>
 
               <h3 className="mb-3 text-2xl font-bold text-white">
                 {project.title}
@@ -67,6 +65,7 @@ const ProjectsGallery = () => {
                   <Link
                     href={project.github}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition hover:scale-105"
                   >
                     Github
@@ -76,6 +75,7 @@ const ProjectsGallery = () => {
                 <Link
                   href={project.live}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur transition hover:bg-white/20"
                 >
                   Live Demo

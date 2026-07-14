@@ -52,6 +52,7 @@ const Footer = () => {
               <Link
                 href={socialLink.path}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-3 rounded-lg border border-white/5 bg-white/0 px-3 py-2 transition-all hover:bg-white/5"
               >
                 {/* Ícone */}
